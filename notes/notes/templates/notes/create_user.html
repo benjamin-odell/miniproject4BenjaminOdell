@@ -5,13 +5,19 @@
 <h1>Create Account</h1>
     {% if error %}
     <div class="alert alert-danger" role="alert">{{ error }}</div>
-    {% endif %}
-<form method="POST" action="{% url 'create_user' %}">
+{% endif %}
+<div class="container">
+    <form method="POST" action="{% url 'create_user' %}">
     {% csrf_token %}
-    <label for="username">Username</label>
-    <input type="text" name="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" required>
-    <input type="submit" value="Create Account">
-</form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" required class="form-control" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" required class="form-control" placeholder="Enter Password">
+        </div>
+        <input type="submit" value="Create Account" class="btn btn-primary">
+    </form>
+</div>
 {% endblock %}

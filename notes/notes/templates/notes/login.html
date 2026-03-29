@@ -5,12 +5,18 @@
     {% if error %}
     <div class="alert alert-danger" role="alert">{{ error }}</div>
     {% endif %}
-<form method="POST" action="{% url 'login' %}">
-    {% csrf_token %}
-    <label for="username">Username</label>
-    <input type="text" name="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" required>
-    <input type="submit" value="Login">
-</form>
+<div class="container">
+    <form class="form-group" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" required class="form-control" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" required class="form-control" placeholder="Enter Password">
+        </div>
+        <input type="submit" value="Login" class="btn btn-primary">
+    </form>
+</div>
 {% endblock %}
