@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Create Account{% endblock %}
+
+{% block content %}
+<h1>Create Account</h1>
+<form method="POST" action="{% url 'create_user' %}">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input type="text" name="username" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" required>
+    <input type="submit" value="Create Account">
+</form>
+{% endblock %}
