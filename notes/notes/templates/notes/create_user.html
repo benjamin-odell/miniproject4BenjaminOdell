@@ -3,6 +3,9 @@
 
 {% block content %}
 <h1>Create Account</h1>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endif %}
 <form method="POST" action="{% url 'create_user' %}">
     {% csrf_token %}
     <label for="username">Username</label>
