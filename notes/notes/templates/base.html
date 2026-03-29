@@ -1,0 +1,21 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Flaskr</title>
+<nav>
+  <h1>Notes App</h1>
+  <ul>
+    {% if user %}
+      <li><span>User Name</span>
+      <li><a href="">Log Out</a>
+    {% else %}
+      <li><a href="">Register</a>
+      <li><a href="">Log In</a>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% block content %}{% endblock %}
+</section>
+
