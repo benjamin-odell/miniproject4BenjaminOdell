@@ -35,7 +35,7 @@ def create_user(request):
                 return HttpResponseRedirect(reverse("login"))
 
     #render page
-    return render(request, 'notes/create_user.html', {"error": error})
+    return render(request, 'notes/user/create_user.html', {"error": error})
 
 @login_required
 def logout_view (request):
@@ -62,6 +62,6 @@ def login_view (request):
             else:
                 error = "Incorrect username or password."
 
-    return render(request, 'notes/login.html', {"error": error})
+    return render(request, 'notes/user/login.html', {"error": error})
 
 
