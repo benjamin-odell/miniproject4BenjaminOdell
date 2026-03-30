@@ -4,21 +4,44 @@
 
 <title>{% block title %}{% endblock %} - Notes</title>
 <nav class="navbar navbar-expand-lg">
-<div class="container border rounded">
-  <a class="navbar-brand" href="/">Notes</a>
-{% if user.is_authenticated %}
-    <span class="nav-item">{{ user.get_username }}</span>
-    <a class="nav-item" href="{% url 'logout' %}">Logout</a>
-{% else %}
-    <a class="nav-link active" href="{% url 'create_user' %}">Create Account</a>
-    <a class="nav-link active" href="{% url 'login' %}">Login</a>
-{% endif %}
-</div>
-</nav>
-<section class="content">
-  <header>
-      <div class="container">{% block header %}{% endblock %}</div>
-  </header>
-  <div class="container">{% block content %}{% endblock %}</div>
-</section>
+  <div class="container border rounded">
+    <a class="navbar-brand w-75 fs-1" href="/">Notes</a>
+    {% if user.is_authenticated %}
+      <div class="row">
+        <span class="nav-item">{{ user.get_username }}</span>
+        <a class="nav-item btn-sm" data-bs-toggle="modal" data-bs-target="#logout-modal">Logout</a>
 
+      </div>
+    {% else %}
+      <div class="row">
+        <a class="nav-link active" href="{% url 'login' %}">Login</a>
+        <a class="nav-link active" href="{% url 'create_user' %}">Create Account</a>
+      </div>
+    {% endif %}
+  </div>
+</nav>
+<body>
+  <header>
+    <div class="container">{% block header %}{% endblock %}</div>
+  </header>
+    <div class="container">{% block content %}{% endblock %}</div>
+</body>
+
+
+<div class="modal fade bg-danger-subtle bg-opacity-10" id="logout-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Logout?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Do you really want to logout?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
