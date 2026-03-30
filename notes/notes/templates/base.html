@@ -3,21 +3,31 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer></script>
 
 <title>{% block title %}{% endblock %} - Notes</title>
-<nav class="navbar navbar-expand-lg">
-  <div class="container border rounded">
-    <a class="navbar-brand w-75 fs-1" href="/">Notes</a>
-    {% if user.is_authenticated %}
-      <div class="row">
-        <span class="nav-item">{{ user.get_username }}</span>
-        <a class="nav-item btn-sm" data-bs-toggle="modal" data-bs-target="#logout-modal">Logout</a>
-
-      </div>
-    {% else %}
-      <div class="row">
-        <a class="nav-link active" href="{% url 'login' %}">Login</a>
-        <a class="nav-link active" href="{% url 'create_user' %}">Create Account</a>
-      </div>
-    {% endif %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand fs-1" href="/">Notes</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active">{{ user.get_username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-danger" href="#" data-bs-toggle="modal" data-bs-target="#logout-modal" style="--bs-text-opacity: .9;">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'create_user' %}">Create Account</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
   </div>
 </nav>
 <body>
