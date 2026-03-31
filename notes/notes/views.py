@@ -4,6 +4,10 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
+from django.utils import timezone
+
+from .models import Note
+
 
 # Create your views here.
 def index(request):
@@ -63,5 +67,30 @@ def login_view (request):
                 error = "Incorrect username or password."
 
     return render(request, 'notes/user/login.html', {"error": error})
+
+@login_required
+def create_note (request):
+    error = None
+    if request.method == "POST":
+        title = request.POST.get("title")
+        subject = request.POST.get("subject")
+        content = request.POST.get("content")
+        is_public = request.POST.get("is_public")
+        u = request.user
+        if title is None:
+            error = "Title is required."
+        elif subject is None:
+            error = "Subject is required."
+        elif content is None:
+            error = "Content is required."
+        else:
+            if is_public is None:
+                is_public = False
+            n = Note(user=u,title=title, subject=subject, content=content,is_public=is_public, pub_date=timezone.now())
+            n.save()
+            return HttpResponseRedirect(reverse("index"))
+
+
+    return render(request, 'notes/notes/create_note.html', {'error': error})
 
 

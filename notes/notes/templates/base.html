@@ -13,6 +13,9 @@
         <ul class="navbar-nav ms-auto">
             {% if user.is_authenticated %}
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create_note' %}">Create Note</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active">{{ user.get_username }}</a>
                 </li>
                 <li class="nav-item">
