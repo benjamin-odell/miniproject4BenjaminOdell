@@ -6,5 +6,6 @@ class Note(models.Model):
     title = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)
     content = models.TextField()
+    is_public = models.BooleanField(default=False)
     pub_date = models.DateTimeField("date published")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
