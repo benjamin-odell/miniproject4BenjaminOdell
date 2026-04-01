@@ -11,8 +11,10 @@
                         <h5 class="card-title">{{ note.title }}</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary">{{ note.subject }}</h6>
                         <p class="card-text">{{ note.content }}</p>
-                        <p class="card-text">{{ note.date }}</p>
+                    </div>
+                    <div class="card-footer">
                         <p class="card-text">{{ note.user.username }}</p>
+                        <p class="card-text">{{ note.pub_date }}</p>
                     </div>
                 </div>
             {% endfor %}

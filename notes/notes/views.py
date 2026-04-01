@@ -134,7 +134,7 @@ def edit_note (request, note_id):
     return render(request, 'notes/notes/edit_note.html', {'error': error, 'note': n})
 
 def public_notes (request):
-    notes = Note.objects.filter(is_public=True)
+    notes = Note.objects.filter(is_public=True).order_by("-pub_date")
     return render(request, 'notes/notes/public_notes.html', {'notes': notes})
 
 @login_required

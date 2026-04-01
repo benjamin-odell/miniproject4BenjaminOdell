@@ -3,3 +3,40 @@
 {% block header %}
 <h1>Welcome to Notes App</h1>
 {% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-8">
+        <p class="lead">A simple and secure place to store your thoughts, ideas, and important information.</p>
+        <p>Create private notes, share them publicly, and access them from anywhere. Whether you're jotting down quick reminders or writing detailed documents, Notes App keeps everything organized.</p>
+        <hr class="my-4">
+        <h3>Features</h3>
+        <ul>
+            <li>✅ Create, edit, and delete your personal notes</li>
+            <li>🌍 Make notes public to share with everyone</li>
+            <li>🔒 Private notes are visible only to you</li>
+            <li>👤 Simple user registration and login</li>
+        </ul>
+        {% if not user.is_authenticated %}
+        <div class="mt-4">
+            <a href="{% url 'create_user' %}" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg ms-2">Login</a>
+        </div>
+        {% else %}
+        <div class="mt-4">
+            <a href="{% url 'my_notes' %}" class="btn btn-primary btn-lg">View My Notes</a>
+            <a href="{% url 'create_note' %}" class="btn btn-success btn-lg ms-2">Create New Note</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title">Recent Public Notes</h5>
+                <p class="card-text">Check out what others are sharing in the <a href="{% url 'public_notes' %}">Public Notes</a> section.</p>
+                <a href="{% url 'public_notes' %}" class="btn btn-outline-primary">Browse Public Notes</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
