@@ -9,3 +9,6 @@ class Note(models.Model):
     is_public = models.BooleanField(default=False)
     pub_date = models.DateTimeField("date published")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username + ": " + self.title
