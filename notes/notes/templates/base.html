@@ -11,12 +11,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'public_notes' %}">Public Notes</a>
+            </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'create_note' %}">Create Note</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active">{{ user.get_username }}</a>
+                    <a class="nav-link active" href="{% url 'my_notes' %}">{{ user.get_username }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active text-danger" href="#" data-bs-toggle="modal" data-bs-target="#logout-modal" style="--bs-text-opacity: .9;">Logout</a>

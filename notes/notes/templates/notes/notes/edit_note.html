@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Edit Note{% endblock %}
+
+{% block content %}
+    <p class="fs-1">Edit Note</p>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endif %}
+    <div class="container">
+        <form method="POST" action="{% url 'edit_note' note.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" required class="form-control" placeholder="Title" value="{{note.title}}">
+            </div>
+            <div class="form-group my-md-3">
+                <label for="subject">subject</label>
+                <input type="text" name="subject" required class="form-control" placeholder="subject" value="{{note.subject}}">
+            </div>
+            <div class="form-group my-md-3">
+                <label for="content">Note</label>
+                <input type="text" name="content" required class="form-control" placeholder="Note" value="{{note.content}}">
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is_public" name="is_public" {% if note.is_public %}checked{% endif %}>
+                <label class="form-check-label" for="is_public">Is Public?</label>
+            </div>
+            <input type="submit" value="Save" class="btn btn-primary my-md-3">
+        </form>
+    </div>
+{% endblock %}

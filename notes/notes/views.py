@@ -76,6 +76,7 @@ def create_note (request):
         subject = request.POST.get("subject")
         content = request.POST.get("content")
         is_public = request.POST.get("is_public")
+        print(is_public)
         u = request.user
         if title is None:
             error = "Title is required."
@@ -86,11 +87,64 @@ def create_note (request):
         else:
             if is_public is None:
                 is_public = False
+            else:
+                is_public = True
             n = Note(user=u,title=title, subject=subject, content=content,is_public=is_public, pub_date=timezone.now())
             n.save()
             return HttpResponseRedirect(reverse("index"))
 
 
     return render(request, 'notes/notes/create_note.html', {'error': error})
+
+@login_required
+def my_notes (request):
+    notes = Note.objects.filter(user=request.user)
+    return render(request, 'notes/notes/my_notes.html', {'notes': notes})
+
+@login_required
+def edit_note (request, note_id):
+    error = None
+    n = Note.objects.get(id=note_id)
+    if n.user != request.user:
+        return HttpResponseRedirect(reverse("index"))
+
+    if request.method == "POST":
+        title = request.POST.get("title")
+        subject = request.POST.get("subject")
+        content = request.POST.get("content")
+        is_public = request.POST.get("is_public")
+        if title is None:
+            error = "Title is required."
+        elif subject is None:
+            error = "Subject is required."
+        elif content is None:
+            error = "Content is required."
+        else:
+            if is_public is None:
+                is_public = False
+            else:
+                is_public = True
+            n.title = title
+            n.subject = subject
+            n.content = content
+            n.is_public = is_public
+            n.save()
+            return HttpResponseRedirect(reverse("index"))
+
+    return render(request, 'notes/notes/edit_note.html', {'error': error, 'note': n})
+
+def public_notes (request):
+    notes = Note.objects.filter(is_public=True)
+    return render(request, 'notes/notes/public_notes.html', {'notes': notes})
+
+@login_required
+def delete_note (request, note_id):
+    n = Note.objects.get(id=note_id)
+    if n.user != request.user:
+        return HttpResponseRedirect(reverse("index"))
+
+    n.delete()
+    return HttpResponseRedirect(reverse("my_notes"))
+
 
 
