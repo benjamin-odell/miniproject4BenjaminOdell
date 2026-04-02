@@ -1,14 +1,10 @@
 ### INF601 - Advanced Programming in Python
 ### Benjamin Odell
 ### Mini Project 4
- 
- 
-# Note Web App
- 
-This is a simple web app for taking notes. You can create, edit, and delete note. There is also a public visibility toggle for you let everyone view your note
 
- 
-## Getting Started
+# Note Web App
+
+This is a simple web app for taking notes. You can create, edit, and delete notes. There is also a public visibility toggle to let everyone view your note.
  
 ### Dependencies
 
@@ -19,7 +15,7 @@ pip install -r requirements.txt
  
 ### Installing
  
-Make sure to CD into the folder with the manage.py file<br>
+Make sure to CD into the notes folder with the manage.py file<br>
 Run the command
 ```angular2html
 python manage.py makemigrations
